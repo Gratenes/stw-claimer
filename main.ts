@@ -30,16 +30,19 @@ client.on('ready', async () => {
   ]);
 })
 
+
 client.on('interactionCreate', async (i:any) => {
   const interaction = i as CommandInteraction;
   if(!i.isCommand) return;
 
   switch (interaction.commandName) {
     case 'claimreward':
-      return import('./commands/claim').then((z) => z.default(interaction));
+      import('./commands/claim').then((z) => z.default(interaction));
+      return;
   
     case 'intro':
-      return import('./commands/intro').then((z) => z.default(interaction));
+      import('./commands/intro').then((z) => z.default(interaction));
+      return;
   }
 })
 
