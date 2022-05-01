@@ -20237,5 +20237,12 @@ export default {
     "app": "fortnite",
     "in_app_id": "757ea8eaecd546b58b8b47dbcd04e175",
     "platform": "other"
+  },
+  "items": {
+    "type": "daily_rewards",
+    "primary": true,
+    "daysLoggedIn": 189,
+    "items": [],
+    "claimedItem": "150 V-Bucks & X-Ray Tickets"
   }
 }

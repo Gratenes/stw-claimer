@@ -15,11 +15,10 @@ const intro = async (interaction: CommandInteraction) => {
     }
   }
   );
-  const loginData = await login.json();
+  const loginData = await login.json() as items;
 
   if (login.status !== 200) {
-    console.log(loginData);
-    if (loginData.errorMesssage) return interaction.reply(loginData.errorMesssage);
+    if (loginData.errorMessage) return interaction.reply(loginData.errorMessage);
     return interaction.reply('Invalid auth code');
   };
 
@@ -45,8 +44,12 @@ const intro = async (interaction: CommandInteraction) => {
   finalMessage.embeds[0].description += '\n';
 
   /* The items length are the rewards claimed, if it is 0 the reward has already been claimed or the user does not have any more rewards (this is after 365 days i think) */
-  if (loginData.length > 0) finalMessage.embeds[0].description += `Todays reward is **${loginData.claimedItem || 'Not supposed to see this....'}** `;
-  else finalMessage.embeds[0].description += 'The reward has already been claimed!';
+  if (!loginData.items) return interaction.reply('You have no more rewards to claim');
+  if (loginData.items.length > 0) finalMessage.embeds[0].description += `Todays reward is **${loginData.claimedItem || 'Not supposed to see this....'}** `;
+  else {
+    finalMessage.embeds[0].description += 'The reward has already been claimed!'
+    finalMessage.embeds[0].color = 16711680;
+  };
 
   return interaction.reply(finalMessage);
 };
